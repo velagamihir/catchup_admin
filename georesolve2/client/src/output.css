@@ -237,9 +237,6 @@
   .bg-\[\#211A4D\] {
     background-color: #211A4D;
   }
-  .bg-\[\.\/favicon\.png\] {
-    background-color: ./favicon.png;
-  }
   .bg-black {
     background-color: var(--color-black);
   }
