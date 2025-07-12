@@ -1,3 +1,0 @@
-secondary color: #211A4D
-primary color: #2282ce
-teritiary color: #165a91

@@ -14,16 +14,30 @@ class AuthorityLogin extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Center(
-              child: Text(
-                "Welcome to GeoResolve!!!",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Row(
+                children: [
+                  Text(
+                    "Welcome to GeoResolve!!!",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24.0,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 20.0),
-            Image.asset('assets/images/logoAuthorityLogin.png', height: 120.0),
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.only(left: 40.0),
+              child: Image.asset(
+                'assets/images/logoAuthorityLogin.png',
+                height: 200.0,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(24.0),
               child: Column(
                 children: [
                   Padding(
@@ -72,6 +86,21 @@ class AuthorityLogin extends StatelessWidget {
                       ),
                     ),
                     child: Text("Login", style: TextStyle(color: Colors.white)),
+                  ),
+                  const SizedBox(height: 25.0,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Don't have an account?", style: TextStyle(fontWeight: FontWeight.normal),),
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, '/register'),
+                        child: Text(
+                          "Signup",
+                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
