@@ -5,44 +5,31 @@ class AuthorityLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? role;
-    List<String> roles = ['role1', 'role2', 'role3'];
-    final roleController = TextEditingController();
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
+    List<String> roles = ['role1', 'role2', 'role3', 'role4'];
+    String? role;
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
         child: Column(
-          mainAxisSize: MainAxisSize.max,
           children: [
             Center(
               child: Text(
                 "Welcome to GeoResolve!!!",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
               ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/images/logoAuthorityLogin.png',
-                  height: 150.0,
-                ),
-              ],
-            ),
-            const SizedBox(height: 0.0),
+            const SizedBox(height: 20.0),
+            Image.asset('assets/images/logoAuthorityLogin.png', height: 120.0),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.0),
               child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 150.0),
+                    padding: const EdgeInsets.only(right: 200),
                     child: DropdownButtonFormField(
+                      value: role,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: "Role",
@@ -50,45 +37,44 @@ class AuthorityLogin extends StatelessWidget {
                       items: roles.map((String role) {
                         return DropdownMenuItem(value: role, child: Text(role));
                       }).toList(),
-                      onChanged: (String? newValue) {
-                        role = newValue;
+                      onChanged: (String? newSelected) {
+                        role = newSelected;
                       },
                     ),
                   ),
                   const SizedBox(height: 20.0),
                   TextField(
                     controller: emailController,
-                    maxLength: 50,
                     decoration: InputDecoration(
+                      border: OutlineInputBorder(),
                       labelText: "Email",
                       counterText: "",
-                      border: OutlineInputBorder(),
                     ),
+                    maxLength: 50,
                   ),
                   const SizedBox(height: 20.0),
                   TextField(
                     controller: passwordController,
-                    maxLength: 50,
-                    obscuringCharacter: "*",
-                    obscureText: true,
                     decoration: InputDecoration(
-                      labelText: "Password",
-                      counterText: "",
                       border: OutlineInputBorder(),
+                      labelText: "Password",
                     ),
+                    obscureText: true,
+                    obscuringCharacter: "*",
+                  ),
+                  const SizedBox(height: 20.0),
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      backgroundColor: Color(0xFF511659),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7.0),
+                      ),
+                    ),
+                    child: Text("Login", style: TextStyle(color: Colors.white)),
                   ),
                 ],
               ),
-            ),
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                backgroundColor: Color(0xFF571760),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                ),
-              ),
-              child: Text("Login", style: TextStyle(color: Colors.white)),
             ),
           ],
         ),

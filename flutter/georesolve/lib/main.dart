@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:georesolve/login.dart';
+import 'package:georesolve/authority_login.dart';
+
 void main(){
   runApp(MyApp());
 }
@@ -10,10 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login/authority',
-      routes: {
-        '/login/authority':(context)=>AuthorityLogin(),
-      },
+      initialRoute: '/authority/login',
+      routes: {'/authority/login': (context) => AuthorityLogin()},
     );
   }
 }
