@@ -49,6 +49,7 @@ class Register extends StatelessWidget {
                 ),
               ),
             ),
+            Image.asset('assets/images/registerPageLogo.png',height: 150.0,),
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: Column(
