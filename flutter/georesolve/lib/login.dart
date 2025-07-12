@@ -24,6 +24,8 @@ class AuthorityLogin extends StatelessWidget {
               ),
             ),
             Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
                   'assets/images/logoAuthorityLogin.png',
@@ -40,14 +42,18 @@ class AuthorityLogin extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 150.0),
-                    child: DropdownButtonFormField(decoration: InputDecoration(border: OutlineInputBorder(),
-                    labelText: "Role"),
-                        items: roles.map((String role){
-                      return DropdownMenuItem(value: role,
-                          child: Text(role));
-                    }).toList(), onChanged: (String? newValue){
-                      role=newValue;
-                    }),
+                    child: DropdownButtonFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Role",
+                      ),
+                      items: roles.map((String role) {
+                        return DropdownMenuItem(value: role, child: Text(role));
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        role = newValue;
+                      },
+                    ),
                   ),
                   const SizedBox(height: 20.0),
                   TextField(
