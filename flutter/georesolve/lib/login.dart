@@ -25,7 +25,6 @@ class AuthorityLogin extends StatelessWidget {
             ),
             Row(
               children: [
-                const SizedBox(width: 150.0,),
                 Image.asset(
                   'assets/images/logoAuthorityLogin.png',
                   height: 150.0,
@@ -40,7 +39,7 @@ class AuthorityLogin extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 225.0),
+                    padding: const EdgeInsets.only(right: 150.0),
                     child: DropdownButtonFormField(decoration: InputDecoration(border: OutlineInputBorder(),
                     labelText: "Role"),
                         items: roles.map((String role){
