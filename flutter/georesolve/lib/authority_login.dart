@@ -1,14 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:georesolve/register.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AuthorityLogin extends StatelessWidget {
+class AuthorityLogin extends StatefulWidget {
   const AuthorityLogin({super.key});
 
   @override
+  State<AuthorityLogin> createState() => _AuthorityLoginState();
+}
+
+class _AuthorityLoginState extends State<AuthorityLogin> {
+  final supabase = Supabase.instance.client;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  List<String> roles = ['role1', 'role2', 'role3', 'role4'];
+  String? role;
+
+  void signinUser() async {
+    var password = passwordController.text;
+    var email = mailController.text;
+    try {
+      if (!email.contains('@')) {
+        throw Exception("Enter valid email");
+      }
+      if (password.contains(" ") || email.contains(" ")) {
+        throw Exception("Fields cannot contain spaces");
+      }
+      await supabase.auth.signInWithPassword(password: password, email: email);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("User login successful")));
+    } catch (error) {
+      var message = error.toString();
+      if (message.contains("invalid login credentials")) {
+        message = "Wrong password or username";
+      }
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar( SnackBar(content: Text("Error: $message")));
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
-    List<String> roles = ['role1', 'role2', 'role3', 'role4'];
-    String? role;
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -87,17 +121,23 @@ class AuthorityLogin extends StatelessWidget {
                     ),
                     child: Text("Login", style: TextStyle(color: Colors.white)),
                   ),
-                  const SizedBox(height: 25.0,),
+                  const SizedBox(height: 25.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Don't have an account?", style: TextStyle(fontWeight: FontWeight.normal),),
+                      Text(
+                        "Don't have an account?",
+                        style: TextStyle(fontWeight: FontWeight.normal),
+                      ),
                       TextButton(
                         onPressed: () =>
                             Navigator.pushNamed(context, '/register'),
                         child: Text(
                           "Signup",
-                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ],

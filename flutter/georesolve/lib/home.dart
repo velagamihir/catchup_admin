@@ -5,6 +5,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color mainColor = Color(0xFF201a4a);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF201a4a),
@@ -39,7 +40,7 @@ class Home extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: Color(0xFF201a4a),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0 ),
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
                 child: Text("Login", style: TextStyle(color: Colors.white)),
