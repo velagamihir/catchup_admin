@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:georesolve/register.dart';
+import 'package:georesolve/authority_register.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthorityLogin extends StatefulWidget {
@@ -18,7 +18,7 @@ class _AuthorityLoginState extends State<AuthorityLogin> {
 
   void signinUser() async {
     var password = passwordController.text;
-    var email = mailController.text;
+    var email = emailController.text;
     try {
       if (!email.contains('@')) {
         throw Exception("Enter valid email");
@@ -26,12 +26,18 @@ class _AuthorityLoginState extends State<AuthorityLogin> {
       if (password.contains(" ") || email.contains(" ")) {
         throw Exception("Fields cannot contain spaces");
       }
-      await supabase.auth.signInWithPassword(password: password, email: email);
+      final res=await supabase.auth.signInWithPassword(password: password, email: email);
+      final user=res.user;
+      final roleDb=user?.userMetadata?['role'];
+      if(roleDb!=role){
+        await supabase.auth.signOut();
+        throw Exception("Roles doesn't match with the database");
+      }
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text("User login successful")));
     } catch (error) {
-      var message = error.toString();
+      var message = error.toString().replaceAll('Exception:', "");
       if (message.contains("invalid login credentials")) {
         message = "Wrong password or username";
       }
@@ -40,7 +46,6 @@ class _AuthorityLoginState extends State<AuthorityLogin> {
       ).showSnackBar( SnackBar(content: Text("Error: $message")));
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,7 +117,7 @@ class _AuthorityLoginState extends State<AuthorityLogin> {
                   ),
                   const SizedBox(height: 20.0),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () =>signinUser(),
                     style: TextButton.styleFrom(
                       backgroundColor: Color(0xFF511659),
                       shape: RoundedRectangleBorder(
@@ -131,7 +136,7 @@ class _AuthorityLoginState extends State<AuthorityLogin> {
                       ),
                       TextButton(
                         onPressed: () =>
-                            Navigator.pushNamed(context, '/register'),
+                            Navigator.pushReplacementNamed(context, '/register'),
                         child: Text(
                           "Signup",
                           style: TextStyle(

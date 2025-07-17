@@ -36,7 +36,7 @@ class Home extends StatelessWidget {
               const SizedBox(height: 20.0),
               TextButton(
                 onPressed: () =>
-                    Navigator.pushNamed(context, '/authority/login'),
+                    Navigator.pushNamed(context, '/login'),
                 style: TextButton.styleFrom(
                   backgroundColor: Color(0xFF201a4a),
                   shape: RoundedRectangleBorder(

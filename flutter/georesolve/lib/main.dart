@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:georesolve/authority_login.dart';
+import 'package:georesolve/citizen_login.dart';
 import 'package:georesolve/home.dart';
+import 'package:georesolve/authority_register.dart';
+import 'package:georesolve/login.dart';
 import 'package:georesolve/register.dart';
+import 'package:georesolve/role1.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -22,7 +26,10 @@ class MyApp extends StatelessWidget {
       routes: {
         '/':(context)=>Home(),
         '/authority/login': (context) => AuthorityLogin(),
+        '/login':(context)=>Login(),
+        '/role1':(context)=>Role1(),
         '/register':(context)=>Register(),
+        '/citizen/login':(context)=>CitizenLogin(),
       },
     );
   }
