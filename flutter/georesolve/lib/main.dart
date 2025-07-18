@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:georesolve/authority_login.dart';
-import 'package:georesolve/citizen_login.dart';
+import 'package:georesolve/login/authority_login.dart';
+import 'package:georesolve/login/citizen_login.dart';
 import 'package:georesolve/home.dart';
-import 'package:georesolve/authority_register.dart';
-import 'package:georesolve/login.dart';
-import 'package:georesolve/register.dart';
+import 'package:georesolve/register/authority_register.dart';
+import 'package:georesolve/login/login.dart';
+import 'package:georesolve/register/register.dart';
 import 'package:georesolve/role1.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/role1':(context)=>Role1(),
         '/register':(context)=>Register(),
         '/citizen/login':(context)=>CitizenLogin(),
+        '/authority/register':(context)=>AuthorityRegister(),
       },
     );
   }

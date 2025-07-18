@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
+import 'package:crypto/crypto.dart';
 class AuthorityRegister extends StatefulWidget {
   const AuthorityRegister({super.key});
 
@@ -28,54 +28,55 @@ class _RegisterState extends State<AuthorityRegister> {
   Color backgroundColor = Color(0xFFfef7ff);
 
   void addUser() async {
-    var name = nameController.text;
-    var username = usernameController.text;
-    var mail = mailController.text;
-    var password = passwordController.text;
-    var confirmPassword = confirmPasswordController.text;
+    final space = " ";
+    final name = nameController.text;
+    final username = usernameController.text;
+    final mail = mailController.text;
+    final password = passwordController.text;
+    final confirmPassword = confirmPasswordController.text;
     try {
+      if (!mail.contains('@')) {
+        throw Exception("enter valid email");
+      }
+      if (password != confirmPassword) {
+        throw Exception("The Passwords do not match");
+      }
+      if (name.contains(space) ||
+          username.contains(space) ||
+          mail.contains(space) ||
+          password.contains(space) ||
+          confirmPassword.contains(space)) {
+        throw Exception("No field can contain space");
+      }
       if (name.isEmpty ||
           username.isEmpty ||
           mail.isEmpty ||
           password.isEmpty ||
           confirmPassword.isEmpty) {
-        throw Exception("No field can be empty");
-      } else if (!mail.contains('@')) {
-        throw Exception("Enter valid email");
-      } else if (password != confirmPassword) {
-        throw Exception("Passwords do not match");
+        throw Exception("Enter all fields");
       }
-      await supabase.auth.signInWithPassword(password: password, email: mail);
+      await supabase.from('authorityapproval').insert({'name':name,'username':username,'role':role,'districts':district,'mail':mail,'password':password});
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("User registered successfully")),
+          SnackBar(
+            content: const Text("User registered successfully"),
+            backgroundColor: Colors.black,
+          ),
         );
       }
-    } catch (error) {
-      var message = error.toString();
-      if (message.contains("Invalid login credentials")) {
-        supabase.auth.signUp(
-          password: password,
-          email: mail,
-          data: {"role": role, "district": district},
+    } catch (err) {
+      var message = err.toString();
+      message=message.replaceAll("Exception:", "");
+      if(message.contains('duplicate key')){
+        message="User already exists";
+      }
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Error: $message"),
+            backgroundColor: Colors.black,
+          ),
         );
-        if(mounted){
-          Navigator.pushNamed(context, role!);
-    }
-      }
-      else if(message.contains("Email not contains")){
-        if (mounted) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text("Error: $message")));
-        }
-      }
-      else{
-        if (mounted) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text("Error: $message")));
-        }
       }
     }
   }
