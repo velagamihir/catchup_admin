@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:crypto/crypto.dart';
+
 class AuthorityRegister extends StatefulWidget {
   const AuthorityRegister({super.key});
 
@@ -55,7 +55,19 @@ class _RegisterState extends State<AuthorityRegister> {
           confirmPassword.isEmpty) {
         throw Exception("Enter all fields");
       }
-      await supabase.from('authorityapproval').insert({'name':name,'username':username,'role':role,'districts':district,'mail':mail,'password':password});
+      var result = await supabase
+          .from('profiles')
+          .select()
+          .eq("username", username)
+          .eq("name", name)
+          .eq("email", mail);
+      if (result.isEmpty) {
+        if (mounted) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text("User doesn't exists")));
+        }
+      }
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -66,9 +78,9 @@ class _RegisterState extends State<AuthorityRegister> {
       }
     } catch (err) {
       var message = err.toString();
-      message=message.replaceAll("Exception:", "");
-      if(message.contains('duplicate key')){
-        message="User already exists";
+      message = message.replaceAll("Exception:", "");
+      if (message.contains('duplicate key')) {
+        message = "User already exists";
       }
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

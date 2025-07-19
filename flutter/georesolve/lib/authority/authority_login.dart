@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:georesolve/register/authority_register.dart';
+import 'package:georesolve/authority/authority_register.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthorityLogin extends StatefulWidget {

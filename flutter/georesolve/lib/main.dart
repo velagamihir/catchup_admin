@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:georesolve/login/authority_login.dart';
-import 'package:georesolve/login/citizen_login.dart';
-import 'package:georesolve/home.dart';
-import 'package:georesolve/register/authority_register.dart';
-import 'package:georesolve/login/login.dart';
-import 'package:georesolve/register/register.dart';
-import 'package:georesolve/role1.dart';
+import 'package:georesolve/citizen/citizen_dashboard.dart';
+import 'package:georesolve/authority/authority_login.dart';
+import 'package:georesolve/citizen/citizen_login.dart';
+import 'package:georesolve/authority/authority_register.dart';
+import 'package:georesolve/login.dart';
+import 'package:georesolve/register.dart';
+import 'package:georesolve/splash.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -22,15 +22,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/splash',
       routes: {
-        '/':(context)=>Home(),
+        '/splash':(context)=>Splash(),
         '/authority/login': (context) => AuthorityLogin(),
         '/login':(context)=>Login(),
-        '/role1':(context)=>Role1(),
         '/register':(context)=>Register(),
         '/citizen/login':(context)=>CitizenLogin(),
         '/authority/register':(context)=>AuthorityRegister(),
+        '/citizen/dashboard':(context)=>CitizenDashboard(),
       },
     );
   }
