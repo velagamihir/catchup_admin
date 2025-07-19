@@ -10,8 +10,10 @@ class Splash extends StatelessWidget {
     return Scaffold(
       body: AnimatedSplashScreen(
         splash: 'assets/images/favicon.png',
+        splashIconSize: 500.0,
         nextScreen: Login(),
-        splashTransition: SplashTransition.rotationTransition,
+        splashTransition: SplashTransition.scaleTransition,
+        animationDuration: Duration(seconds: 15),
       ),
     );
   }
