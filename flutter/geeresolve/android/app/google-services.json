@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "582587637",
+    "project_id": "georesolve-5e0ce",
+    "storage_bucket": "georesolve-5e0ce.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582587637:android:af3d83f2f48800d7ede1bc",
+        "android_client_info": {
+          "package_name": "com.example.geeresolve"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582587637-r94nopd8p9921hu4tc9l16sgqi5fv01q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwIHxLSboRRaQwqYIPHHdpDXq4aXCD0eY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582587637-r94nopd8p9921hu4tc9l16sgqi5fv01q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "582587637-omole5jes1reqi33s7ll547j7mp68ijr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.georesolve"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582587637:android:b7963d1ce861357aede1bc",
+        "android_client_info": {
+          "package_name": "com.example.georesolve"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582587637-r94nopd8p9921hu4tc9l16sgqi5fv01q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwIHxLSboRRaQwqYIPHHdpDXq4aXCD0eY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582587637-r94nopd8p9921hu4tc9l16sgqi5fv01q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "582587637-omole5jes1reqi33s7ll547j7mp68ijr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.georesolve"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
