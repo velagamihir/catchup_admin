@@ -26,3 +26,5 @@ flutter:
     - assets/images/favicon.png
     - assets/images/backgroundImageSignIn.jpg
     - assets/images/logoAuthorityLogin.png
+    - assets/images/search_authorities.png
+    - assets/images/Vector.png

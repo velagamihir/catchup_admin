@@ -62,7 +62,7 @@ class Login extends StatelessWidget {
                       SizedBox(
                         width: 250.0,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () =>Navigator.pushNamed(context, '/citizen/login'),
                           style: TextButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),

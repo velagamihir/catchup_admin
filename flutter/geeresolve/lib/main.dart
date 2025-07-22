@@ -2,6 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:geeresolve/authority/authority_login.dart';
 import 'package:geeresolve/authority/authority_register.dart';
+import 'package:geeresolve/citizen/citizen_dashboard.dart';
+import 'package:geeresolve/citizen/citizen_login.dart';
+import 'package:geeresolve/citizen/citizen_problem.dart';
 import 'package:geeresolve/login.dart';
 import 'package:geeresolve/splash.dart';
 
@@ -27,6 +30,9 @@ class MyApp extends StatelessWidget {
         '/splash': (context) => Splash(),
         '/authority/register':(context)=>AuthorityRegister(),
         '/authority/login':(context)=>AuthorityLogin(),
+        '/citizen/login':(context)=>CitizenLogin(),
+        '/citizen/dashboard':(context)=>CitizenDashboard(),
+        '/citizen/issue':(context)=>CitizenProblem(),
       },
     );
   }

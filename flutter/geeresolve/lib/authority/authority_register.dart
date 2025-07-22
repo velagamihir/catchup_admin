@@ -34,10 +34,12 @@ class _AuthorityLoginState extends State<AuthorityRegister> {
     var email = emailController.text.trim();
     var password = passwordController.text.trim();
     var confirmPassword = confirmPasswordController.text.trim();
-    final user=await db.collection("AuthorityApproval").doc(username).get();
+    final user=await db.collection("AuthorityApproval").doc(email).get();
     final userExists=user.exists;
+    final authority=await db.collection("Authorities").doc(username).get();
+    final authorityExists=authority.exists;
     try {
-      if(userExists){
+      if(userExists || authorityExists){
         throw Exception("User already exists");
       }
       if (password != confirmPassword) {
