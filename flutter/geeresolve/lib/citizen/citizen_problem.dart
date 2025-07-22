@@ -47,15 +47,18 @@ class _CitizenProblemState extends State<CitizenProblem> {
           ],
         ),
       ),
-      body: Image.asset('assets/images/complaint.png'),
       bottomNavigationBar: BottomAppBar(
         color: mainColor,
         height: 90.0,
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextButton(
-              onPressed: () {},
+              onPressed: () => Navigator.pushReplacementNamed(
+                context,
+                '/citizen/searchauthorities',
+              ),
               child: Column(
                 children: [
                   Image.asset(
@@ -70,7 +73,7 @@ class _CitizenProblemState extends State<CitizenProblem> {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: ()=>Navigator.pushReplacementNamed(context, '/citizen/dashboard'),
               child: Column(
                 children: [
                   Image.asset('assets/images/Vector.png', height: 30.0),
@@ -78,6 +81,15 @@ class _CitizenProblemState extends State<CitizenProblem> {
                     "Home",
                     style: TextStyle(color: Colors.white, fontSize: 10.0),
                   ),
+                ],
+              ),
+            ),
+            TextButton(
+              onPressed: ()=>Navigator.pushReplacementNamed(context, '/citizen/issue'),
+              child: Column(
+                children: [
+                  Image.asset('assets/images/complaint.png',height: 30.0,),
+                  Text("Issue Complaint",style: TextStyle(color: Colors.white,fontSize: 10.0),),
                 ],
               ),
             ),

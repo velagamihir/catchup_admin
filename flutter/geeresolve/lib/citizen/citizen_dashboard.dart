@@ -83,7 +83,7 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
             ),
             ListTile(
               title: Text("Search Authorities"),
-              onTap: (){},
+              onTap: ()=>Navigator.pushNamed(context, '/citizen/searchauthorities'),
             ),
             ListTile(
               title: Text("Issue Complaint"),
