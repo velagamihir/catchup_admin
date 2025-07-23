@@ -83,6 +83,11 @@ class _CitizenProblemState extends State<CitizenProblem> {
         "village": village,
       };
       await db.collection("problems").doc(_fileName!).set(data);
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text("Complaint Registered")));
+      }
     } catch (error) {
       var message = error.toString();
       if (mounted) {
