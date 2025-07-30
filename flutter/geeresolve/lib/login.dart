@@ -5,130 +5,73 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color mainColor = Color(0xFF180E83);
+    Color primaryColor = Color(0xFFA4F4FF);
+    Color secondaryColor = Color(0xFF211A4D);
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/backgroundImageSignIn.jpg'),
-            fit: BoxFit.cover,
-            opacity: 0.3,
+      body: Column(
+        children: [
+          Image.asset('assets/images/loginPageTop.png', width: 1000.0),
+          Container(
+            height: 100.0,
+            width: 100.0,
+            decoration: BoxDecoration(
+              color: secondaryColor,
+              borderRadius: BorderRadius.circular(500.0),
+            ),
+            child: Image.asset('assets/images/favicon.png', height: 500.0),
           ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Container(
-                  height: 500.0,
-                  width: 500.0,
-                  decoration: BoxDecoration(
-                    color: mainColor,
-                    borderRadius: BorderRadius.circular(24.0),
-                  ),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 50.0),
-                      Container(
-                        height: 50.0,
-                        width: 120.0,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(14.0),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "SignIn",
-                            style: TextStyle(
-                              color: mainColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 28.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 75.0),
-                      Text(
-                        "Are you a",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 36.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      SizedBox(
-                        width: 250.0,
-                        child: TextButton(
-                          onPressed: () =>Navigator.pushNamed(context, '/citizen/login'),
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            side: BorderSide(color: Colors.white, width: 2.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Citizen",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 32.0,
-                                ),
-                              ),
-                              Icon(
-                                Icons.arrow_right,
-                                color: Colors.white,
-                                size: 60.0,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      SizedBox(
-                        width: 250.0,
-                        child: TextButton(
-                          onPressed: ()=>Navigator.pushNamed(context, '/authority/login'),
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            side: BorderSide(color: Colors.white, width: 2.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Authority",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 32.0,
-                                ),
-                              ),
-                              Icon(
-                                Icons.arrow_right,
-                                color: Colors.white,
-                                size: 60.0,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+          const SizedBox(height: 10.0),
+          const Text(
+            "GeoResolve",
+            style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 30.0),
+          SizedBox(
+            height: 50.0,
+            width: 150.0,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: secondaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-            ],
+              onPressed: () => Navigator.pushNamed(context, '/login'),
+              child: Text(
+                "Login",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
-        ),
+          const SizedBox(height: 50.0),
+          SizedBox(
+            height: 50.0,
+            width: 150.0,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+              onPressed: ()=>Navigator.pushNamed(context, '/register'),
+              child: Text(
+                "Register",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 119.1),
+          Image.asset('assets/images/loginpageBottom.png'),
+        ],
       ),
     );
   }
