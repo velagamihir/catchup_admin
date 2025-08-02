@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
     Color secondaryColor = Color(0xFF211A4D);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: primaryColor,
         title: Row(
           children: [
@@ -104,15 +105,49 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-        const SizedBox(height: 60.0,),
+            const SizedBox(height: 60.0),
           ],
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 16.0),
+        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(60.0),
-          child: BottomAppBar(color: primaryColor),
+          child: BottomAppBar(
+            color: primaryColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: Column(
+                    children: [
+                      Icon(Icons.error, color: Colors.black),
+                      Text("Complaint", style: TextStyle(color: Colors.black)),
+                    ],
+                  ),
+                ),
+                TextButton(
+                  onPressed: ()=>Navigator.pushReplacementNamed(context, '/home'),
+                  child: Column(
+                    children: [
+                      Icon(Icons.home_outlined, color: Colors.black),
+                      Text("Home", style: TextStyle(color: Colors.black)),
+                    ],
+                  ),
+                ),
+                TextButton(
+                  onPressed: (){},
+                  child: Column(
+                    children: [
+                      Icon(Icons.circle, color: Colors.black),
+                      Text("Status", style: TextStyle(color: Colors.black)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
