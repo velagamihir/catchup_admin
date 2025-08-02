@@ -72,7 +72,7 @@ class StudentLogin extends StatelessWidget {
                 SizedBox(
                   width: 100.0,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: ()=>Navigator.pushNamedAndRemoveUntil(context, '/home', (route)=>false),
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(

@@ -58,7 +58,7 @@ class Login extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              onPressed: ()=>Navigator.pushNamed(context, '/register'),
+              onPressed: () => Navigator.pushNamed(context, '/register'),
               child: Text(
                 "Register",
                 style: TextStyle(
@@ -69,7 +69,7 @@ class Login extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 119.1),
+          Spacer(),
           Image.asset('assets/images/loginpageBottom.png'),
         ],
       ),
