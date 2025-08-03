@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geeresolve/home_page.dart';
+import 'package:geeresolve/introduction_screen.dart';
 import 'package:geeresolve/login.dart';
 import 'package:geeresolve/splash.dart';
 import 'package:geeresolve/student_login.dart';
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
         '/main': (context) => Login(),
         '/login': (context) => StudentLogin(),
         '/register':(context)=>StudentRegister(),
-        '/home':(context)=>HomePage()
+        '/home':(context)=>HomePage(),
+        '/introduction':(context)=>IntroductionScreen(),
       },
     );
   }

@@ -15,6 +15,7 @@ dependencies:
   camera: ^0.11.2
   supabase_flutter: ^2.9.1
   curved_bottom_navigation_bar: ^0.0.6
+  introduction_screen: ^3.1.17
 
 dev_dependencies:
   flutter_test:
@@ -30,3 +31,5 @@ flutter:
     - assets/images/loginPage.png
     - assets/images/registerPage.png
     - assets/images/homePage.png
+    - assets/images/status.png
+    - assets/images/complaint.png
