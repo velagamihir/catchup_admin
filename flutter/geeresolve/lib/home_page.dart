@@ -121,14 +121,20 @@ class HomePage extends StatelessWidget {
                 TextButton(
                   onPressed: () {},
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(Icons.error, color: Colors.black),
+                      Image.asset(
+                        'assets/images/complaint.png',
+                        color: Colors.black,
+                        height: 15.0,
+                      ),
                       Text("Complaint", style: TextStyle(color: Colors.black)),
                     ],
                   ),
                 ),
                 TextButton(
-                  onPressed: ()=>Navigator.pushReplacementNamed(context, '/home'),
+                  onPressed: () =>
+                      Navigator.pushReplacementNamed(context, '/home'),
                   child: Column(
                     children: [
                       Icon(Icons.home_outlined, color: Colors.black),
@@ -137,10 +143,14 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: (){},
+                  onPressed: () {},
                   child: Column(
                     children: [
-                      Icon(Icons.circle, color: Colors.black),
+                      Image.asset(
+                        'assets/images/status.png',
+                        color: Colors.black,
+                        height: 15.0,
+                      ),
                       Text("Status", style: TextStyle(color: Colors.black)),
                     ],
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart' as intro;
 class IntroductionScreen extends StatefulWidget {
   const IntroductionScreen({super.key});
@@ -15,6 +16,10 @@ bool checkBox=false;
       body: intro.IntroductionScreen(
         onDone: ()=>Navigator.pushNamedAndRemoveUntil(context, '/home', (route)=>false),
         showDoneButton: _currentIndex==2 && checkBox,
+        done: Text("Done"),
+        onSkip: ()=>SystemNavigator.pop(),
+        skip: Text("Close"),
+        showSkipButton: true,
         onChange: (int valueChanged){
           setState(() {
             _currentIndex=valueChanged;
@@ -22,7 +27,6 @@ bool checkBox=false;
         },
         showNextButton: true,
         next: Text("Next"),
-        done: Text("Done"),
         pages: [
           intro.PageViewModel(
             title: "Page 1",
@@ -49,7 +53,6 @@ bool checkBox=false;
                               checkBox=valueCheck!;
                             });
                       }
-
                       ),
                     ],
                   ),
@@ -57,7 +60,6 @@ bool checkBox=false;
               ],
             )
           ),
-
         ],
       ),
     );
