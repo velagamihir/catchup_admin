@@ -1,12 +1,44 @@
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final _auth = firebase_auth.FirebaseAuth.instance;
+  firebase_auth.User? _user;
+  String? photoLink;
+  String? username;
+
+  @override
+  void initState() {
+    super.initState();
+    _user = _auth.currentUser;
+    if (_user != null) {
+      photoLink = _user!.photoURL;
+      username=_user!.displayName;
+    } else {
+      photoLink = null;
+      username=null;
+    }
+  }
+void signOut()async{
+    await _auth.signOut();
+    setState(() {
+      _user=null;
+    });
+    if(mounted){
+      Navigator.pushNamedAndRemoveUntil(context, '/main', (route)=>false);
+    }
+}
+  @override
   Widget build(BuildContext context) {
     Color primaryColor = Color(0xFFA4F4FF);
-    Color secondaryColor = Color(0xFF211A4D);
+    // Color secondaryColor = Color(0xFF211A4D);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -22,16 +54,16 @@ class HomePage extends StatelessWidget {
         ),
       ),
       endDrawer: Drawer(
+        width: 250.0,
         child: ListView(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CircleAvatar(
+                CircleAvatar(backgroundImage: NetworkImage(photoLink!),
                   radius: 30.0,
-                  child: Icon(Icons.person, size: 30.0),
                 ),
-                Text("Username", style: TextStyle(fontSize: 32.0)),
+                Text(username!, style: TextStyle(fontSize: 24.0)),
               ],
             ),
             const SizedBox(height: 20.0),
@@ -53,11 +85,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 20.0),
             ListTile(
               title: Text("Logout", style: TextStyle(fontSize: 20.0)),
-              onTap: () => Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/splash',
-                (route) => false,
-              ),
+              onTap: () => signOut(),
             ),
           ],
         ),
@@ -66,6 +94,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             Container(
+              width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(color: primaryColor),
               child: Image.asset('assets/images/homePage.png'),
             ),

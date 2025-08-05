@@ -13,6 +13,9 @@ dependencies:
   supabase_flutter: ^2.9.1
   curved_bottom_navigation_bar: ^0.0.6
   introduction_screen: ^3.1.17
+  firebase_auth: ^6.0.0
+  firebase_core: ^4.0.0
+  google_sign_in: ^6.1.15
 
 dev_dependencies:
   flutter_test:
