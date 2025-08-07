@@ -20,21 +20,23 @@ class _HomePageState extends State<HomePage> {
     _user = _auth.currentUser;
     if (_user != null) {
       photoLink = _user!.photoURL;
-      username=_user!.displayName;
+      username = _user!.displayName;
     } else {
       photoLink = null;
-      username=null;
+      username = null;
     }
   }
-void signOut()async{
+
+  void signOut() async {
     await _auth.signOut();
     setState(() {
-      _user=null;
+      _user = null;
     });
-    if(mounted){
-      Navigator.pushNamedAndRemoveUntil(context, '/main', (route)=>false);
+    if (mounted) {
+      Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
     }
-}
+  }
+
   @override
   Widget build(BuildContext context) {
     Color primaryColor = Color(0xFFA4F4FF);
@@ -60,29 +62,42 @@ void signOut()async{
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CircleAvatar(backgroundImage: NetworkImage(photoLink!),
+                CircleAvatar(
+                  backgroundImage: photoLink != null
+                      ? NetworkImage(photoLink!)
+                      : AssetImage('assets/images/defaultAvatar.png'),
                   radius: 30.0,
                 ),
-                Text(username!, style: TextStyle(fontSize: 24.0)),
+                Text(
+                  username != null ? username! : "Username",
+                  style: TextStyle(fontSize: 24.0),
+                ),
               ],
             ),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 5.0),
             ListTile(title: Text("Profile", style: TextStyle(fontSize: 20.0))),
-            const SizedBox(height: 20.0),
-            ListTile(title: Text("About Us", style: TextStyle(fontSize: 20.0))),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 5.0),
+            ListTile(
+              onTap: (()=>Navigator.pushNamed(context, '/about')),
+                title: Text("About Us", style: TextStyle(fontSize: 20.0))),
+            const SizedBox(height: 5.0),
+            ListTile(
+              onTap: () => Navigator.pushNamed(context, '/complaint'),
+              title: Text("Issue Complaints", style: TextStyle(fontSize: 20.0)),
+            ),
+            const SizedBox(height: 5.0),
             ListTile(
               title: Text("User Policy", style: TextStyle(fontSize: 20.0)),
             ),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 5.0),
             ListTile(title: Text("Support", style: TextStyle(fontSize: 20.0))),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 5.0),
             ListTile(
               title: Text("Suggestions", style: TextStyle(fontSize: 20.0)),
             ),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 5.0),
             ListTile(title: Text("FAQs", style: TextStyle(fontSize: 20.0))),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 5.0),
             ListTile(
               title: Text("Logout", style: TextStyle(fontSize: 20.0)),
               onTap: () => signOut(),
