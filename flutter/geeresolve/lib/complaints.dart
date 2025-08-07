@@ -31,25 +31,37 @@ class _ComplaintsState extends State<Complaints> {
   String? issueType; //the issue that is selected
   String? block; //the block that is selected
   final supabase = Supabase.instance.client;
-
   // method to file the complaint and add the picture to the storage bucket
   void uploadImage() async {
+    var issue = issueController.text.trim();
+    var roomNo = roomNoController.text.trim();
     try {
-      if(_photoUploaded==false){
-        final pickedImage = await _picker.pickImage(source: ImageSource.camera);
-        filePath = "citizen_issues/${_user!.displayName} ${DateTime.now()}";
-        setState(() {
-          _imageFile = pickedImage;
-        });
-        final File file = File(pickedImage!.path);
-        await supabase.storage.from('problems').upload(filePath!, file);
-        setState(() {
-          _photoUploaded = true;
-        });
-        debugPrint("Photo Upload successful");
-      }
-      else{
-        throw Exception("Photo already uploaded");
+      if (_user != null) {
+        if (issue.isEmpty ||
+            roomNo.isEmpty ||
+            issueType == null ||
+            block == null) {
+          throw Exception("Enter the remaining fields first");
+        }
+        if (_photoUploaded == false) {
+          final pickedImage = await _picker.pickImage(
+            source: ImageSource.camera,
+          );
+          filePath = "$issueType-${_user.email!.replaceAll("@gmail.com", "")}-${DateTime.now().millisecond}";
+          setState(() {
+            _imageFile = pickedImage;
+          });
+          final File file = File(pickedImage!.path);
+          await supabase.storage.from('problems.bucket').upload(filePath!, file);
+          setState(() {
+            _photoUploaded = true;
+          });
+          debugPrint("Photo Upload successful");
+        } else {
+          throw Exception("Photo already uploaded");
+        }
+      } else {
+        throw Exception("Please login first");
       }
     } catch (error) {
       var message = error.toString();
@@ -85,9 +97,13 @@ class _ComplaintsState extends State<Complaints> {
       });
       debugPrint("Submission successfully");
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: const Text("Submission Successful")));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              "Submission Successful\nYour problem id is $filePath. Please note it down",
+            ),
+          ),
+        );
       }
     } catch (error) {
       var message = error.toString();
@@ -269,7 +285,9 @@ class _ComplaintsState extends State<Complaints> {
                     child: TextButton(
                       onPressed: () => submitProblem(),
                       style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                         backgroundColor: secondaryColor,
                       ),
                       child: Text(

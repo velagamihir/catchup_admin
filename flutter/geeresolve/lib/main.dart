@@ -6,6 +6,7 @@ import 'package:geeresolve/home_page.dart';
 import 'package:geeresolve/introduction_screen.dart';
 import 'package:geeresolve/login.dart';
 import 'package:geeresolve/splash.dart';
+import 'package:geeresolve/status.dart';
 import 'package:geeresolve/support.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/complaint':(context)=>Complaints(),
         '/about':(context)=>AboutUs(),
         '/support':(context)=>Support(),
+        '/status':(context)=>Status()
       },
     );
   }
