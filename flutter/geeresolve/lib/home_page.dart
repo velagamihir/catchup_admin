@@ -78,8 +78,9 @@ class _HomePageState extends State<HomePage> {
             ListTile(title: Text("Profile", style: TextStyle(fontSize: 20.0))),
             const SizedBox(height: 5.0),
             ListTile(
-              onTap: (()=>Navigator.pushNamed(context, '/about')),
-                title: Text("About Us", style: TextStyle(fontSize: 20.0))),
+              onTap: (() => Navigator.pushNamed(context, '/about')),
+              title: Text("About Us", style: TextStyle(fontSize: 20.0)),
+            ),
             const SizedBox(height: 5.0),
             ListTile(
               onTap: () => Navigator.pushNamed(context, '/complaint'),
@@ -90,7 +91,10 @@ class _HomePageState extends State<HomePage> {
               title: Text("User Policy", style: TextStyle(fontSize: 20.0)),
             ),
             const SizedBox(height: 5.0),
-            ListTile(title: Text("Support", style: TextStyle(fontSize: 20.0))),
+            ListTile(
+              onTap: () => Navigator.pushNamed(context, '/support'),
+              title: Text("Support", style: TextStyle(fontSize: 20.0)),
+            ),
             const SizedBox(height: 5.0),
             ListTile(
               title: Text("Suggestions", style: TextStyle(fontSize: 20.0)),
@@ -163,7 +167,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: ()=>Navigator.pushNamed(context, '/complaint'),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

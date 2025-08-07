@@ -14,7 +14,7 @@ bool checkBox=false;
   Widget build(BuildContext context) {
     return Scaffold(
       body: intro.IntroductionScreen(
-        onDone: ()=>Navigator.pushNamedAndRemoveUntil(context, '/home', (route)=>false),
+        onDone: ()=>Navigator.pushNamedAndRemoveUntil(context, '/main', (route)=>false),
         showDoneButton: _currentIndex==2 && checkBox,
         done: Text("Done"),
         onSkip: ()=>SystemNavigator.pop(),

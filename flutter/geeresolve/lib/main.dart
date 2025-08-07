@@ -6,6 +6,7 @@ import 'package:geeresolve/home_page.dart';
 import 'package:geeresolve/introduction_screen.dart';
 import 'package:geeresolve/login.dart';
 import 'package:geeresolve/splash.dart';
+import 'package:geeresolve/support.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/introduction': (context) => IntroductionScreen(),
         '/complaint':(context)=>Complaints(),
         '/about':(context)=>AboutUs(),
+        '/support':(context)=>Support(),
       },
     );
   }
