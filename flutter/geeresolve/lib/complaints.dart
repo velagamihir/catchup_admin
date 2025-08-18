@@ -47,15 +47,15 @@ class _ComplaintsState extends State<Complaints> {
           final pickedImage = await _picker.pickImage(
             source: ImageSource.camera,
           );
+          setState(() {
+            _photoUploaded = true;
+          });
           filePath = "$issueType-${_user.email!.replaceAll("@gmail.com", "")}-${DateTime.now().millisecond}";
           setState(() {
             _imageFile = pickedImage;
           });
           final File file = File(pickedImage!.path);
           await supabase.storage.from('problems.bucket').upload(filePath!, file);
-          setState(() {
-            _photoUploaded = true;
-          });
           debugPrint("Photo Upload successful");
         } else {
           throw Exception("Photo already uploaded");
@@ -115,9 +115,9 @@ class _ComplaintsState extends State<Complaints> {
       }
     }
   }
-
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Color(0xFFA4F4FF);
     return Scaffold(
       appBar: AppBar(
         title: Text("Complaints", style: TextStyle(fontSize: 32.0)),

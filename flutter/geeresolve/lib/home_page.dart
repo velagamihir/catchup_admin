@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage> {
               "GeoResolve",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
             ),
+            IconButton(onPressed: (){}, icon: Badge.count(count: 3))
           ],
         ),
       ),
@@ -88,19 +89,19 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 5.0),
             ListTile(
-              title: Text("User Policy", style: TextStyle(fontSize: 20.0)),
-            ),
-            const SizedBox(height: 5.0),
-            ListTile(
               onTap: () => Navigator.pushNamed(context, '/support'),
               title: Text("Support", style: TextStyle(fontSize: 20.0)),
             ),
             const SizedBox(height: 5.0),
             ListTile(
-              title: Text("Suggestions", style: TextStyle(fontSize: 20.0)),
+              onTap: () => Navigator.pushNamed(context, '/status'),
+              title: Text("Status", style: TextStyle(fontSize: 20.0)),
             ),
             const SizedBox(height: 5.0),
-            ListTile(title: Text("FAQs", style: TextStyle(fontSize: 20.0))),
+            ListTile(
+              onTap: () => Navigator.pushNamed(context, '/faq'),
+              title: Text("FAQs", style: TextStyle(fontSize: 20.0)),
+            ),
             const SizedBox(height: 5.0),
             ListTile(
               title: Text("Logout", style: TextStyle(fontSize: 20.0)),
@@ -167,7 +168,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  onPressed: ()=>Navigator.pushNamed(context, '/complaint'),
+                  onPressed: () => Navigator.pushNamed(context, '/complaint'),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -191,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushNamed(context, '/status'),
                   child: Column(
                     children: [
                       Image.asset(

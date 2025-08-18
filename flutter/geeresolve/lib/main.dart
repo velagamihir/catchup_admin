@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:geeresolve/about_us.dart';
 import 'package:geeresolve/complaints.dart';
+import 'package:geeresolve/faq.dart';
 import 'package:geeresolve/home_page.dart';
 import 'package:geeresolve/introduction_screen.dart';
 import 'package:geeresolve/login.dart';
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
         '/complaint':(context)=>Complaints(),
         '/about':(context)=>AboutUs(),
         '/support':(context)=>Support(),
-        '/status':(context)=>Status()
+        '/status':(context)=>Status(),
+        '/faq':(context)=>FAQ()
       },
     );
   }

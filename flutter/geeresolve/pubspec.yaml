@@ -17,6 +17,7 @@ dependencies:
   firebase_core: ^4.0.0
   google_sign_in: ^6.1.15
   image_picker: ^1.1.2
+  firebase_messaging: ^16.0.0
 
 dev_dependencies:
   flutter_test:
@@ -38,3 +39,4 @@ flutter:
     - assets/images/defaultAvatar.png
     - assets/images/support.png
     - assets/images/statusPage.png
+    - assets/images/faq.png
