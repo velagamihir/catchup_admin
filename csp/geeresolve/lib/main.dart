@@ -1,0 +1,52 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:geeresolve/about_us.dart';
+import 'package:geeresolve/complaints.dart';
+import 'package:geeresolve/faq.dart';
+import 'package:geeresolve/home_page.dart';
+import 'package:geeresolve/login.dart';
+import 'package:geeresolve/splash.dart';
+import 'package:geeresolve/status.dart';
+import 'package:geeresolve/support.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+Future<void> main() async {
+ try{
+   WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp();
+   await Supabase.initialize(
+     url: 'https://aqdcwwdcgvpdouybuzzz.supabase.co',
+     anonKey:
+     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxZGN3d2RjZ3ZwZG91eWJ1enp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0NzEwMTAsImV4cCI6MjA2ODA0NzAxMH0.Lm9mRpYLZR7P1OJK1EnKXS2ReE4vnNdIStugGzeo9mU',
+   );
+   runApp(MyApp());
+ }
+ catch(error){
+   var message=error.toString();
+   debugPrint(message);
+ }
+}
+
+final supabase = Supabase.instance.client;
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/splash',
+      routes: {
+        '/splash': (context) => Splash(),
+        '/main': (context) => Login(),
+        '/home': (context) => HomePage(),
+        '/complaint':(context)=>Complaints(),
+        '/about':(context)=>AboutUs(),
+        '/support':(context)=>Support(),
+        '/status':(context)=>Status(),
+        '/faq':(context)=>FAQ()
+      },
+    );
+  }
+}
