@@ -23,7 +23,7 @@ const TestimonialsAdmin = () => {
     const { data, error } = await supabase
       .from("testimonials")
       .select("*")
-      .order("id", { ascending: true });
+      .order("id", { ascending: false });
     if (error) console.error("Error fetching testimonials:", error.message);
     else setTestimonials(data);
     setLoading(false);
@@ -57,7 +57,8 @@ const TestimonialsAdmin = () => {
       // Add new testimonial
       const { data, error } = await supabase
         .from("testimonials")
-        .insert([formData]);
+        .insert([formData])
+        .select();
       if (error) alert("Failed to add testimonial.");
       else setTestimonials([...testimonials, data[0]]);
       setFormData({ name: "", role: "", message: "" });

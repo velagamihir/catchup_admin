@@ -34,6 +34,12 @@ const Home = () => {
           >
             Testimonials
           </button>
+          <button
+            onClick={() => navigate("/addAdmin")}
+            className={`${PRIMARY_COLOR_BG} text-white w-full py-3 rounded-lg hover:opacity-90 transition font-semibold`}
+          >
+            Add Admin
+          </button>
 
           <button
             onClick={() => window.location.reload()}
