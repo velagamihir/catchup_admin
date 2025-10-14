@@ -1,5 +1,4 @@
-// src/pages/Login.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { supabase } from "../SupabaseClient";
 import { useNavigate } from "react-router-dom";
 import "../output.css";
@@ -9,18 +8,35 @@ const PRIMARY_COLOR_TEXT = "text-[#FF7F00]";
 
 const Login = () => {
   const navigate = useNavigate();
+
+  // 🔸 Form states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // 🚫 Redirect if user is already logged in
+  useEffect(() => {
+    const checkSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (session) {
+        navigate("/home", { replace: true });
+      }
+    };
+
+    checkSession();
+  }, [navigate]);
+
+  // 🔐 Handle login form
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
     try {
-      // 🔥 Supabase login (no signup)
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -28,7 +44,7 @@ const Login = () => {
 
       if (error) throw error;
 
-      // ✅ Redirect on success
+      // ✅ On success
       navigate("/home");
     } catch (err) {
       console.error("Login failed:", err.message);
@@ -47,22 +63,26 @@ const Login = () => {
           CatchUp Admin Login
         </h1>
 
+        {/* ⚠️ Error Message */}
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
+        {/* 🔸 Login Form */}
         <form onSubmit={handleLogin} className="space-y-4">
           <input
             type="email"
             placeholder="Admin Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none"
+            required
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none"
+            required
           />
           <button
             type="submit"
