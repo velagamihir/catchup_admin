@@ -6,6 +6,7 @@ const AddAdmin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("admin"); // default role
+  const [adminName, setadminName] = useState(""); // default role
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -28,7 +29,7 @@ const AddAdmin = () => {
       // 2. Add user to admins table with role
       const { data: profileData, error: profileError } = await supabase
         .from("admins") // make sure this table exists
-        .insert([{ email, role }]);
+        .insert([{ email, adminName }]);
 
       if (profileError) {
         setMessage(`Error adding to admins table: ${profileError.message}`);
@@ -76,15 +77,15 @@ const AddAdmin = () => {
           className="w-full px-4 py-3 mb-4 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
         />
 
-        <label className="block mb-2 font-semibold">Role</label>
-        <select
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          className="w-full px-4 py-3 mb-6 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
-        >
-          <option value="admin">Admin</option>
-          <option value="editor">Editor</option>
-        </select>
+        <label className="block mb-2 font-semibold">Name</label>
+        <input
+          type="text"
+          value={adminName}
+          onChange={(e) => setadminName(e.target.value)}
+          required
+          placeholder="Enter the name of Admin:"
+          className="w-full px-4 py-3 mb-4 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+        />
 
         <button
           type="submit"

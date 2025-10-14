@@ -27,6 +27,7 @@ import {
   Video,
   TrendingUp,
   BarChart2,
+  Upload,
 } from "lucide-react";
 
 // 🎨 Original Color Palette Restored
@@ -296,6 +297,12 @@ const Home = () => {
             icon={Plus}
             label="Add Admin"
             onClick={() => navigate("/addAdmin")}
+            sidebarOpen={sidebarOpen}
+          />
+          <NavItem
+            icon={Upload}
+            label="Video Upload"
+            onClick={() => navigate("/videoUpload")}
             sidebarOpen={sidebarOpen}
           />
         </nav>
