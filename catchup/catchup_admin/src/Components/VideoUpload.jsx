@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "../SupabaseClient";
 import { useNavigate } from "react-router-dom";
+import { Edit2, Trash2 } from "lucide-react";
 
 export default function VideoUpload() {
   const navigate = useNavigate();
@@ -10,6 +11,10 @@ export default function VideoUpload() {
   const [description, setDescription] = useState("");
   const [thumbnailFile, setThumbnailFile] = useState(null);
   const [videoFile, setVideoFile] = useState(null);
+
+  // Video list state
+  const [videos, setVideos] = useState([]);
+  const [loadingVideos, setLoadingVideos] = useState(true);
 
   const logout = async () => {
     try {
@@ -22,6 +27,26 @@ export default function VideoUpload() {
     }
   };
 
+  // Fetch all videos
+  const fetchVideos = async () => {
+    setLoadingVideos(true);
+    const { data, error } = await supabase
+      .from("catchup_media")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error(error);
+      alert("Failed to fetch videos");
+    } else setVideos(data || []);
+    setLoadingVideos(false);
+  };
+
+  useEffect(() => {
+    fetchVideos();
+  }, []);
+
+  // Upload handler
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUploading(true);
@@ -64,12 +89,45 @@ export default function VideoUpload() {
       setThumbnailFile(null);
       setVideoFile(null);
       e.target.reset();
+
+      fetchVideos(); // refresh list
     } catch (err) {
       console.error(err);
       alert("❌ Error: " + err.message);
     } finally {
       setUploading(false);
     }
+  };
+
+  // Delete single video
+  const deleteVideo = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this video?")) return;
+    const { error } = await supabase
+      .from("catchup_media")
+      .delete()
+      .eq("id", id);
+    if (error) alert("Failed to delete video");
+    else setVideos((prev) => prev.filter((v) => v.id !== id));
+  };
+
+  // Delete all videos
+  const deleteAllVideos = async () => {
+    if (!window.confirm("Are you sure you want to delete ALL videos?")) return;
+    const { error } = await supabase
+      .from("catchup_media")
+      .delete()
+      .neq("id", 0);
+    if (error) alert("Failed to delete all videos");
+    else setVideos([]);
+  };
+
+  // Edit video (prefill form)
+  const editVideo = (video) => {
+    setTitle(video.title);
+    setDescription(video.description);
+    setYtLink(video.video_link);
+    // Optionally: allow editing thumbnail/video files
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -98,8 +156,9 @@ export default function VideoUpload() {
         </div>
       </header>
 
-      {/* Main Form */}
-      <main className="flex-grow flex items-center justify-center p-6">
+      {/* Main Content */}
+      <main className="flex-grow flex flex-col items-center justify-start p-6 space-y-8">
+        {/* Upload Form */}
         <div className="w-full max-w-3xl bg-white p-8 rounded-2xl shadow-xl border-t-4 border-[#FF7F00]">
           <h2 className="text-3xl font-bold text-center text-[#FF7F00] mb-8">
             Upload Your Video 🎬
@@ -158,13 +217,11 @@ export default function VideoUpload() {
               <input
                 type="file"
                 accept="image/*"
-                required
                 onChange={(e) => setThumbnailFile(e.target.files[0])}
                 className="w-full p-2.5 border border-gray-300 rounded-xl shadow-sm cursor-pointer focus:ring-2 focus:ring-[#FF7F00] focus:outline-none transition"
               />
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={uploading}
@@ -177,6 +234,66 @@ export default function VideoUpload() {
               {uploading ? "Uploading..." : "Submit Video"}
             </button>
           </form>
+        </div>
+
+        {/* Existing Videos List */}
+        <div className="w-full max-w-5xl bg-white p-6 rounded-2xl shadow-xl border-t-4 border-[#FF7F00]">
+          <h2 className="text-2xl font-bold text-[#FF7F00] mb-4">
+            Uploaded Videos
+          </h2>
+
+          {loadingVideos ? (
+            <p>Loading videos...</p>
+          ) : videos.length === 0 ? (
+            <p>No videos uploaded yet.</p>
+          ) : (
+            <>
+              <table className="w-full text-left border-collapse shadow-md rounded-lg">
+                <thead>
+                  <tr className="bg-gray-100">
+                    <th className="px-4 py-2">Title</th>
+                    <th className="px-4 py-2">YouTube Link</th>
+                    <th className="px-4 py-2">Uploaded At</th>
+                    <th className="px-4 py-2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {videos.map((v) => (
+                    <tr key={v.id} className="border-b hover:bg-gray-50">
+                      <td className="px-4 py-2">{v.title}</td>
+                      <td className="px-4 py-2 break-all">{v.video_link}</td>
+                      <td className="px-4 py-2">
+                        {new Date(v.created_at).toLocaleString()}
+                      </td>
+                      <td className="px-4 py-2 flex gap-2">
+                        <button
+                          onClick={() => editVideo(v)}
+                          className="bg-yellow-500 text-white px-3 py-1 rounded flex items-center gap-1"
+                        >
+                          <Edit2 size={16} /> Edit
+                        </button>
+                        <button
+                          onClick={() => deleteVideo(v.id)}
+                          className="bg-red-500 text-white px-3 py-1 rounded flex items-center gap-1"
+                        >
+                          <Trash2 size={16} /> Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <div className="mt-4 flex justify-end">
+                <button
+                  onClick={deleteAllVideos}
+                  className="bg-red-600 text-white px-4 py-2 rounded shadow-md"
+                >
+                  Delete All Videos
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </main>
 
